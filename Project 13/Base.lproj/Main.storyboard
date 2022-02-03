@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,7 +22,6 @@
                                         <rect key="frame" x="10" y="10" width="354" height="558"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="owN-CA-4bb" firstAttribute="centerX" secondItem="w8w-0k-clN" secondAttribute="centerX" id="I3z-M4-a1c"/>
                                     <constraint firstItem="owN-CA-4bb" firstAttribute="centerY" secondItem="w8w-0k-clN" secondAttribute="centerY" id="iOm-cU-EkU"/>
@@ -94,7 +92,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="WS0-bw-EJ3" firstAttribute="centerY" secondItem="Jvf-9L-0xo" secondAttribute="centerY" id="2ro-m5-7li"/>
                             <constraint firstItem="w8w-0k-clN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="8lS-Rz-ij9"/>
@@ -135,7 +133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-110" y="82"/>
+            <point key="canvasLocation" x="542" y="90"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sos-Kh-GRN">
@@ -156,9 +154,4 @@
             <point key="canvasLocation" x="-883" y="83"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
