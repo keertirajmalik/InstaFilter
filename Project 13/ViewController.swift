@@ -10,6 +10,7 @@ import CoreImage
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
+    @IBOutlet var changeFilterButton: UIButton!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var intensity: UISlider!
     var currentImage: UIImage!
@@ -70,7 +71,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         guard let actionTitle = action.title else { return }
         
         currentFilter = CIFilter(name: actionTitle)
-        
+        changeFilterButton.setTitle(actionTitle, for: .normal) 
         let beginImage = CIImage(image: currentImage)
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
         
