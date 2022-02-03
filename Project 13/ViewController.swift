@@ -13,6 +13,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     @IBOutlet var changeFilterButton: UIButton!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var intensity: UISlider!
+    @IBOutlet var radiusSlider: UISlider!
+    @IBOutlet var scaliSlider: UISlider!
     var currentImage: UIImage!
     
     var context: CIContext!
