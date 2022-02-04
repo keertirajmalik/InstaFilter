@@ -14,7 +14,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var intensity: UISlider!
     @IBOutlet var radiusSlider: UISlider!
-    @IBOutlet var scaliSlider: UISlider!
+    @IBOutlet var scaleSlider: UISlider!
+    @IBOutlet var buttonView: UIView!
+    
+    @IBOutlet var importImageButton: UIButton!
     var currentImage: UIImage!
     
     var context: CIContext!
@@ -23,18 +26,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background_3.png")!)
-
+        
         
         title = "InstaFilter"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(importImage))
         
         context = CIContext()
-        currentFilter = CIFilter(name: "CISepiaTone")
-        changeFilterButton.setTitle("CISepiaTone", for: .normal)
+        currentFilter = CIFilter(name: "CIBumpDistortion")
+        changeFilterButton.setTitle("CIBumpDistortion", for: .normal)
+        
+        
+        buttonView.layer.shadowColor = UIColor.black.cgColor
+        buttonView.layer.shadowOffset = CGSize(width: 1.0, height: 2.0)
+        buttonView.layer.shadowOpacity = 0.4
+        buttonView.layer.shadowRadius = 3.0
+        buttonView.layer.masksToBounds = true
+        buttonView.layer.cornerRadius = CGFloat(15)
     }
     
-    @objc
-    func importImage() {
+    @IBAction func importImageButtonClicked(_ sender: Any) {
         let picker = UIImagePickerController()
         picker.allowsEditing = true
         picker.delegate = self
@@ -46,12 +55,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         dismiss(animated: true)
         currentImage = image
         
+        print(currentImage.size.width, currentImage.size.height)
+        
+        
+        imageView.frame.size = CGSize(width: currentImage.size.width, height: currentImage.size.height)
+        print(imageView.frame.size)
+        imageView.layer.borderColor = UIColor.black.cgColor
+        imageView.layer.borderWidth = 5
+        
         let beginImage = CIImage(image: currentImage)
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
         applyProcessing()
     }
     
     @IBAction func changeFilter(_ sender: UIButton) {
+        
         guard let _ = imageView.image else {
             showAlert(title: "No Image Imported", message: "Import image then try to change filter.")
             return
@@ -80,8 +98,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         guard currentImage != nil else { return }
         guard let actionTitle = action.title else { return }
         
-        currentFilter = CIFilter(name: actionTitle)
         changeFilterButton.setTitle(actionTitle, for: .normal)
+        changeFilterButton.sizeToFit()
+        changeFilterButton.titleLabel?.numberOfLines = 1
+        changeFilterButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        
+        currentFilter = CIFilter(name: actionTitle)
         let beginImage = CIImage(image: currentImage)
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
         
@@ -113,7 +136,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         }
         
         if inputKeys.contains(kCIInputScaleKey) {
-            currentFilter.setValue(scaliSlider.value * 10, forKey: kCIInputScaleKey)
+            currentFilter.setValue(scaleSlider.value * 10, forKey: kCIInputScaleKey)
         }
         
         if inputKeys.contains(kCIInputCenterKey) {
