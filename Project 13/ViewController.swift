@@ -52,6 +52,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     }
     
     @IBAction func changeFilter(_ sender: UIButton) {
+        guard let _ = imageView.image else {
+            showAlert(title: "No Image Imported", message: "Import image then try to change filter.")
+            return
+        }
+        
         let ac = UIAlertController(title: "Choose filter", message: nil, preferredStyle: .actionSheet)
         
         ac.addAction(UIAlertAction(title: "CIBumpDistortion", style: .default, handler: setFilter))
